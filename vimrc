@@ -1,7 +1,10 @@
-set nocompatible			" required
-filetype off				" required
 
-" set runtime path to include Vundle and initialize
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vundle Setup
+"
+
+set nocompatible  " required
+filetype off  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
@@ -9,65 +12,150 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/syntastic'
-Plugin 'nvie/vim-flake8'
+Plugin 'davidhalter/jedi-vim'
 Plugin 'vim-airline/vim-airline'
-Plugin 'valloric/youcompleteme'
 Plugin 'scrooloose/nerdtree'
-Plugin 'tpope/vim-fugitive'
-Plugin 'blueshirts/darcula'
+Plugin 'airblade/vim-gitgutter'
+call vundle#end()  " required
 
-call vundle#end()			    " required
-filetype plugin indent on       " required
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Custom Configuration
+"
+
+filetype plugin indent on  " required
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mouse
-" set mouse=a
+"
 
-" Leader Shortcuts
+set mouse=a
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Leader
+"
+
+" map leader key to <space>
 let mapleader="\<space>"
-nnoremap <leader>w :w<cr>:source %<cr>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Save and Quit
+"
+
+" save
+nnoremap <leader>w :w<cr>
+
+" quit
 nnoremap <leader>q :q<cr>
-nnoremap <leader>wq :wq!<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Windows
+"
+
+" switch windows
+nnoremap <c-w> <c-w>w
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Split
+"
+
+set splitright
+set splitbelow
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Buffers
+"
+
+" previous buffer
+nnoremap < :bp<cr>
+
+" next buffer
+nnoremap > :bn<cr>
 
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colors
-colorscheme darcula
-syntax enable					" enable syntax processing
+"
+
+set background=dark
 
 
-" Spaces & Tabs
-set tabstop=4					" number of visual spaces per <tab>
-set softtabstop=4				" number of spaces in tab when editing
-set expandtab					" tabs are spaces
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Syntax
+"
+
+" enable syntax processing
+syntax on
 
 
-" UI Config
-set number					    " show line numbers
-set showcmd					    " show command in bottom bar
-set wildmenu					" visual autocomplete for command menu
-set lazyredraw					" redraw only when needed
-set showmatch					" highlight matching brackets
-let g:airline_powerline_fonts=1
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Spaces and Tabs
+"
+
+" number of visual spaces per <tab>
+set tabstop=4
+
+" number of spaces in tab when editing
+set softtabstop=4
+
+" tabs are spaces
+set expandtab
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" UI
+"
+
+" show line numbers
+set number
+
+" show command in bottom bar
+set showcmd
+
+" visual autocomplete for command menu
+set wildmenu
+
+set wildignore+=*.pyc
+
+" redraw only when needed
+set lazyredraw
+
+" highlight matching brackets
+set showmatch
+
 set laststatus=2
 
 
-" Searching
-set incsearch					"search as characters are entered
-set hlsearch					" highlight matches
-nnoremap <esc><esc> :nohlsearch<cr>	" turn off search highlight
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Search
+"
+
+" search as you type
+set incsearch
+
+" highlight matches
+set hlsearch
+
+" remove highlighting
+nnoremap <esc><esc> :nohlsearch<cr>
 
 
-" CtrlP
-let g:ctrlp_match_window='bottom,order:ttb'
-let g:ctrlp_switch_buffer=0
-let g:ctrlp_working_path_mode=0
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Tabs
+"
+
+"map <c-t> :tabnew<cr>
+"map <leader>t :tabnext<cr>
 
 
-" NERDTree
-let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
-nnoremap <c-t> :NERDTreeToggle<cr>
-
-
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Python
+"
+
 au BufNewFile,BufRead *.py
     \ set tabstop=4 |
     \ set softtabstop=4 |
@@ -76,27 +164,72 @@ au BufNewFile,BufRead *.py
     \ set autoindent |
     \ set fileformat=unix |
     \ set encoding=utf-8 |
-    \ let g:ycm_autoclose_preview_window_after_completion=1 |
-    \ map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR> |
-    \ let python_highlight_all=1 |
-    \ syntax on
+
+let python_highlight_all=1
+syntax on
 
 
-py << EOF
-import os
-import sys
-if 'VIRTUAL_ENV' in os.environ:
-    project_base_dir = os.environ['VIRTUAL_ENV']
-    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-    execfile(activate_this, dict(__file__=activate_this))
-EOF
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"  ctrlp
+"
 
-" Syntastic
+let g:ctrlp_map='<c-p>'
+let g:ctrlp_cmd='CtrlP'
+let g:ctrlp_working_path_mode='ra'
+let g:ctrlp_match_window='bottom,order:ttb'
+let g:ctrlp_switch_buffer=0
+let g:ctrlp_working_path_mode=0
+let g:ctrlp_custom_ignore='\v[\/]\.(pyc)$'
+let g:ctrlp_by_filename=1
+let g:ctrlp_open_multiple_files = '2h'
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"  jedi
+"
+
+" dont show docstring completion at top
+"autocmd FileType python setlocal completeopt-=preview
+let g:jedi#show_call_signatures="2"
+
+
+" Pop up menu colors
+hi Pmenu ctermbg=blue ctermfg=black
+hi PmenuSel ctermbg=black ctermfg=blue
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"  syntastic
+"
+
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-let g:syntastic_always_populate_loc_list=1
-let g:syntastic_auto_loc_list=1
-let g:syntastic_check_on_open=1
-let g:syntastic_check_on_wq=0
+let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes':   [],'passive_filetypes': [] }
+let g:syntastic_python_flake8_args="--ignore=E501"
+
+" debug syntastic
+"let g:syntastic_debug = 3
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"  vim-airline
+"
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts=1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" nerdtree
+"
+
+" close after opening a file
+let NERDTreeQuitOnOpen=1
+
+" ignore files in NERDTree
+let NERDTreeIgnore=['\.pyc$', '\~$']
+map <c-n> :NERDTreeToggle<cr>
+
+" Close if nerdtree is the only window open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+
