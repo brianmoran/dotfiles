@@ -18,14 +18,14 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'airblade/vim-gitgutter'
 call vundle#end()  " required
 
-
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Custom Configuration
 "
 
 filetype plugin indent on  " required
 
+" match parens
+hi MatchParen cterm=none ctermbg=none ctermfg=magenta
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mouse
@@ -221,6 +221,9 @@ let g:airline_powerline_fonts=1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " nerdtree
 "
+
+" don't open automatically
+let g:NERDTreeHijackNetrw=0
 
 " close after opening a file
 let NERDTreeQuitOnOpen=1
