@@ -6,31 +6,39 @@
 set nocompatible  " required
 filetype off  " required
 set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=/usr/local/opt/fzf
 call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
-Plugin 'kien/ctrlp.vim'
+"Plugin 'kien/ctrlp.vim'
+Plugin 'junegunn/fzf.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'scrooloose/syntastic'
-"Plugin 'davidhalter/jedi-vim'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-airline/vim-airline'
 Plugin 'scrooloose/nerdtree'
-Plugin 'tyrannicaltoucan/vim-quantum'
+Plugin 'morhetz/gruvbox'  "theme
 Plugin 'majutsushi/tagbar'
+Plugin 'yggdroot/indentline'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'ap/vim-buftabline'
+Plugin 'fatih/vim-go'
+Plugin 'valloric/youcompleteme'
 call vundle#end()  " required
 
 
 filetype plugin indent on  " required
 
+let mapleader=" "
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Custom Configuration
-"
+" yank to clipboard
+if has("clipboard")
+  set clipboard=unnamed " copy to the system clipboard
 
-" map leader key to <space>
-let mapleader="\<space>"
+  if has("unnamedplus") " X11 support
+    set clipboard+=unnamedplus
+  endif
+endif
 
 " osx backspace fix
 set backspace=indent,eol,start
@@ -41,19 +49,21 @@ set noswapfile
 " match parens
 hi MatchParen cterm=none ctermbg=none ctermfg=magenta
 
-" mouse support
-set mouse=a
+" mouse support/ system clipboard
+set mouse-=a
 
 " enable syntax processing
 syntax on
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " UI
 "
 
 " show line numbers
-set number
+"set number
+
+" shoe relative line number
+"set relativenumber
 
 " show command in bottom bar
 set showcmd
@@ -73,6 +83,8 @@ set laststatus=2
 
 set cursorline
 
+" font GUI
+set guifont=Knack\ Nerd\ Font:h12
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Save and Quit
@@ -100,10 +112,12 @@ nnoremap <c-w> <c-w>w
 " Buffers
 "
 
-:nnoremap <tab> :bnext<cr>
-:nnoremap <s-tab> :bprevious<cr>
+" switch buffers without saving
+set hidden
+nnoremap <tab> :bnext<cr>
+nnoremap <s-tab> :bprevious<cr>
 
-
+com! FormatJSON %!python -m json.tool
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Split
 "
@@ -122,7 +136,7 @@ nnoremap <c-h> <c-w><c-h>
 
 set background=dark
 set termguicolors
-colorscheme quantum
+colorscheme gruvbox
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -138,6 +152,10 @@ set softtabstop=4
 " tabs are spaces
 set expandtab
 
+set autoindent
+set smartindent
+set shiftwidth=4
+set noexpandtab
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Search
@@ -174,37 +192,6 @@ syntax on
 "                         PLUGINS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"  ctrlp
-"
-
-let g:ctrlp_map='<c-p>'
-let g:ctrlp_cmd='CtrlP'
-let g:ctrlp_working_path_mode='ra'
-let g:ctrlp_match_window='bottom,order:ttb'
-let g:ctrlp_switch_buffer=0
-let g:ctrlp_working_path_mode=0
-let g:ctrlp_custom_ignore='\v[\/]\.(pyc)$'
-let g:ctrlp_by_filename=1
-let g:ctrlp_open_multiple_files = '2h'
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"  jedi
-"
-
-" dont show docstring completion at top
-"autocmd FileType python setlocal completeopt-=preview
-"let g:jedi#show_call_signatures="2"
-
-
-" Pop up menu colors
-"hi Pmenu ctermbg=blue ctermfg=black
-"hi PmenuSel ctermbg=black ctermfg=blue
-
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " nerdtree
 "
@@ -220,7 +207,7 @@ let NERDTreeIgnore=['\.pyc$', '\~$']
 nmap <c-n> :NERDTreeToggle<cr>
 
 " close if nerdtree is the only window open
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+au BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -251,16 +238,5 @@ nmap <c-m> :TagbarToggle<CR>
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts=1
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" YouCompleteMe
-"
-
-nmap <leader>d :YcmCompleter GoToDefinition<CR>
-
-
-
-
 
 
