@@ -1,0 +1,203 @@
+call plug#begin('~/.vim/plugged')
+
+" Files, buffers, navigation
+Plug 'scrooloose/nerdtree'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'itchyny/lightline.vim'
+Plug 'raimondi/delimitmate'
+
+" Themes
+Plug 'altercation/vim-colors-solarized'
+Plug 'kaicataldo/material.vim'
+Plug 'morhetz/gruvbox'
+
+Plug 'ap/vim-buftabline'
+Plug 'majutsushi/tagbar'
+
+" Languages
+Plug 'fatih/vim-go'
+Plug 'valloric/youcompleteme'
+
+call plug#end()
+
+" ================================================
+" Color scheme
+" ================================================
+" Enable true colors
+if (has("termguicolors"))
+  set termguicolors
+endif
+
+" material theme settings
+"let g:material_theme_style = 'palenight'
+"let g:lightline = { 'colorscheme': 'material_vim' }
+
+" set color scheme
+set background=dark
+"colorscheme material
+colorscheme gruvbox
+
+set guifont=Hack\ Nerd\ Font:h14
+" ================================================
+" General config
+" ================================================
+set relativenumber
+set number
+set autoread							                    "Reload file changes outside vim
+set ignorecase							                    "Case insensitive search
+set cursorline							                    "Highlight row
+set hlsearch							                    "Highlight search results
+set incsearch							                    "Show matches in real time
+set clipboard+=unnamed					                    "System clipboard
+set fileencoding=utf-8					                    "Set UTF-8 on write
+set encoding=utf-8						                    "For vim
+set laststatus=2
+set hidden								                    "Switch buffers when not saved
+set mouse=a								                    "Enable mouse support
+set lazyredraw							                    "For macros
+autocmd BufNewFile,BufRead * setlocal formatoptions-=cro    "Don't continue comment on next line
+syntax on								                    "Turn on syntax highlighting
+
+
+" ================================================
+" Indentation
+" ================================================
+set smarttab 
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
+set expandtab
+set smartindent
+set autoindent
+
+" ================================================
+" Completion
+" ================================================
+set wildmenu
+set wildignore+=*.pyc
+
+" ================================================
+" Swap files
+" ================================================
+set noswapfile
+set nobackup
+set nowb
+
+" ================================================
+" Functions
+" ================================================
+function! ToggleSyntax()
+    if (exists("g:syntax_on"))
+        syntax off
+    else
+        syntax enable
+    endif
+endfunction
+
+" ================================================
+" Key mappings (bindings)
+" ================================================
+" Map leader
+let mapleader = "\<Space>""
+
+" Reload vim config
+nnoremap <Leader><Leader>r :source ~/.vimrc<CR>
+
+" ToggleSyntax
+nnoremap <Leader><Leader>s :call ToggleSyntax()<CR>
+
+" Paste and copy pasted
+nnoremap <Leader>v viwpyiw
+
+" Format JSON
+nnoremap <Leader><Leader>j :%!python -m json.tool<CR>
+
+" Fast save
+nnoremap <Leader>ww :w<CR>
+
+" Fast quit
+nnoremap <Leader>qq :q!<CR>
+
+" Fast write and quit
+nnoremap <Leader>wq :wq<CR>
+
+" Hide search highlight
+nnoremap <esc><esc> :noh<CR>
+
+" Indenting in visual and normal mode
+xnoremap <s-tab> <gv
+xnoremap <tab> >gv
+nnoremap <tab> >>
+nnoremap <s-tab> <<
+
+" switch buffers with tab or s-tab
+nnoremap <tab> :bnext<cr>
+nnoremap <s-tab> :bprevious<cr>
+
+" ================================================
+" Plugin settings and mappings (bindings)
+" ================================================
+
+" ================================================
+" bufftabline
+" ================================================
+
+
+set hidden
+nnoremap <tab> :bnext<cr>
+
+" ================================================
+" nerdtree
+" ================================================
+
+
+" Open automatically of no files specified
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+" shortcut key
+nnoremap <Leader>f :NERDTreeToggle<Enter>
+
+" goto file in tree
+nnoremap <silent> <Leader>v :NERDTreeFind<CR>
+
+" close if nerdtree is the only window left
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" ui stuff
+let NERDTreeMinimalUI = 1
+
+" ================================================
+" tagbar
+" ================================================
+nmap <leader>tt :TagbarToggle<cr>
+" ================================================
+" vim-go
+" ================================================
+
+
+" highlighters
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+
+" use goimports to auto insert import paths instead of gofmt
+let g:go_fmt_command = "goimports"
+
+" disable gofmt on save
+let g:go_fmt_autosave = 1
+
+" ================================================
+" youcompleteme
+" ================================================
+
+
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+set completeopt-=preview
+nmap <leader>gr :YcmCompleter GoToReferences<cr>
