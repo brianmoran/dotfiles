@@ -13,9 +13,13 @@ source ~/.config/fish/urbn.fish
 
 
 # nvm
-function nvm
-    bass source (brew --prefix nvm)/nvm.sh --no-use ';' nvm $argv
-end
+#function nvm
+#    bass source (brew --prefix nvm)/nvm.sh --no-use ';' nvm $argv
+#end
 
-set -x NVM_DIR "$HOME/.nvm"
-nvm use default --silent
+#set -x NVM_DIR "$HOME/.nvm"
+#nvm use default --silent
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/moranb1/.google-cloud-sdk/path.fish.inc' ]; . '/Users/moranb1/.google-cloud-sdk/path.fish.inc'; end
+source /usr/local/opt/asdf/asdf.fish
