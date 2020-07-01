@@ -20,6 +20,6 @@ set -x PATH $ORACLE_HOME $PATH
 
 
 # python
-set -x PYTHONDONTWRITEBYTECODE true
+set -x PYTHONDONTWRITEBYTECODE 1
 set -x PYTHON_CONFIGURE_OPTS "--enable-framework"
 

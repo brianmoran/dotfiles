@@ -1,5 +1,7 @@
 call plug#begin('~/.vim/plugged')
 
+Plug 'tpope/vim-sensible'
+
 " Utility
 Plug 'scrooloose/nerdtree'
 Plug 'preservim/nerdcommenter'
@@ -10,6 +12,7 @@ Plug 'yggdroot/indentline'
 Plug 'mileszs/ack.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'ryanoasis/vim-devicons'
+Plug 'qpkorr/vim-bufkill'
 
 " Themes
 Plug 'morhetz/gruvbox'
@@ -23,9 +26,11 @@ Plug 'vim-python/python-syntax' "syntax highlighting
 
 if has('nvim')
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-let g:coc_global_extensions = [
-            \ 'coc-json',
-            \ 'coc-python']
+" let g:coc_global_extensions = [
+            " \ 'coc-json',
+            " \ 'coc-python',
+	    " \ 'coc-lists',
+            " \ 'coc-yaml']
 endif
 
 call plug#end()
@@ -49,15 +54,11 @@ nnoremap <Leader>wq<CR> :wq<CR>
 " format json
 com! FormatJSON %!python -m json.tool<CR>
 
-" remove highlight
-"nnoremap <silent> <Leader><Leader><CR> :noh<CR>
-
 " outdent in visual and normal mode
 xnoremap <s-tab> <gv 										
 
 " indent in visual and normal mode
 xnoremap <tab> >gv 											
-
 " switch buffer
 nnoremap <silent> <tab> :bnext<cr>
 
@@ -65,7 +66,7 @@ nnoremap <silent> <tab> :bnext<cr>
 nnoremap <silent> <s-tab> :bprevious<CR>
 
 " delete buffer
-nnoremap <silent> <Leader>bd<CR> :bd<CR>
+nnoremap <silent> <Leader>bd<CR> :BD<CR>
 
 " disable dd register
 nnoremap dd "_dd 											
@@ -92,12 +93,6 @@ let g:lightline = { 'colorscheme': 'nightowl' }
 " system clipboard
 set clipboard+=unnamed
 
-" set utf-8 on write
-set fileencoding=utf-8
-
-" utf-8 encoding
-set encoding=utf-8
-
 " enable mouse support
 set mouse=a
 
@@ -107,29 +102,9 @@ set nocompatible
 " don't continue comment on next line
 autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
 
-" keep cursor in the middle when scrolling
-set so=999
-
-" ---------------------------------------------------------------------
-" INDENTS
-" ---------------------------------------------------------------------
-
-" new lines inherit indent from previous line
-set autoindent
-" convert tabs to spaces
-set expandtab
-set smarttab
-set smartindent
-set shiftwidth=4                
-set softtabstop=4
-" indent using 4 spaces
-set tabstop=4                   
-
 " ---------------------------------------------------------------------
 " SEARCH
 " ---------------------------------------------------------------------
-" enable search highlighting
-set hlsearch
 
 " ignore case when searching
 set ignorecase
@@ -144,46 +119,19 @@ set smartcase
 " PERFORMANCE
 " ---------------------------------------------------------------------
 
-" limit the files searched for auto-completes
-set complete-=i
-
 " don't update screen during macros and script execution
 set lazyredraw
 
 " ---------------------------------------------------------------------
 " UI
 " ---------------------------------------------------------------------
-set encoding=utf-8
-
-" avoid wrapping in middle of word
-set linebreak
-
-" number of screen lines to keep above and below
-set scrolloff=1
-
-" number of screen columns to keep to the left and right of cursor
-set sidescrolloff=1
-
-syntax enable
-
-""" wrap long lines
-set wrap
-
-" highlight cursor row
-set cursorline
 
 " font
 set guifont=Hack\ Nerd\ Font:h14
 
-" always display status bar
-set laststatus=2
-
 " enable line numbers and relative line numbers
 set number
 set relativenumber
-
-" always show cursor position
-set ruler
 
 " create splits to the right and to the bottom
 set splitbelow
@@ -193,18 +141,13 @@ set splitright
 set title
 
 " display command line's tab complete options as a menu
-set wildmenu
 set wildignore+=*.pyc,__pycache__/
-
-" no backup files
-set nobackup
-set nowritebackup
 
 " ---------------------------------------------------------------------
 " TERMINAL
 " ---------------------------------------------------------------------
 " start terminal in insert mode
-au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+au BufEnter * if &buftype == 'terminal' | :stopinsert | endif
 
 " open terminal on ctrl+n
 nnoremap <c-n> :call OpenTerminal()<CR>
@@ -213,28 +156,10 @@ nnoremap <c-n> :call OpenTerminal()<CR>
 tnoremap <Esc> <C-\><C-n>
 
 " ---------------------------------------------------------------------
-" CODE_FOLDING
-" ---------------------------------------------------------------------
-" fold base on indentation levels
-set foldmethod=syntax            
-
-" disable folding by default
-set nofoldenable
-
-" ---------------------------------------------------------------------
 " MISCELLANEOUS
 " ---------------------------------------------------------------------
-" reload on external changes
-set autoread
-
-" backspace fix osx
-set backspace=indent,eol,start
-
 " confirm unsaved changes before closing
 set confirm
-
-" delete comment characters when joining lines
-set formatoptions+=j
 
 " allow hidden buffers
 set hidden
@@ -265,7 +190,7 @@ function! ToggleSyntax()
     endif
 endfunction
 
-function ToggleMouse()
+function! ToggleMouse()
     if &mouse == 'a'
         set mouse=
     else
@@ -314,6 +239,11 @@ if exists('*complete_info')
 else
   inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif
+
+" ---------------------------------------------------------------------
+" COC-HIGHLIGHT
+" ---------------------------------------------------------------------
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " ---------------------------------------------------------------------
 " LANGUAGE: GO
@@ -365,15 +295,24 @@ let g:go_fmt_autosave = 1   " disable gofmt on save
 " ---------------------------------------------------------------------
 " FZF
 " ---------------------------------------------------------------------
-nnoremap <C-p> :FZF<CR>
-let g:fzf_action = {
-  \ 'ctrl-s': 'split',
-  \ 'ctrl-v': 'vsplit'
-  \}
+augroup fzf
+  autocmd!
+  autocmd! FileType fzf
+  autocmd  FileType fzf set laststatus=0 noshowmode noruler
+    \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+augroup END
+
+tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
 if has("nvim")
-  au TermOpen * tnoremap <Esc> <c-\><c-n>
-  au FileType fzf tunmap <Esc>
+  au TermOpen * tnoremap <buffer> <Esc> <c-\><c-n>
+  au FileType fzf tunmap <buffer> <Esc>
 endif
+
+nnoremap <C-p> :FZF<CR>
+" if has("nvim")
+"   au TermOpen * tnoremap <Esc> <c-\><c-n>
+"   au FileType fzf tunmap <Esc>
+" endif
 
 " ---------------------------------------------------------------------
 " INDENTLINE
@@ -388,6 +327,12 @@ nnoremap <C-b> :NERDTreeToggle<CR>
 let NERDTreeIgnore = ['\.pyc$', '__pycache__$']
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+let NERDTreeQuitOnOpen = 0
+
+" open nerdtree when calling vim with no arguments
+"autocmd vimenter * if !argc() | NERDTree | endif
+
 " Automaticaly close nvim if NERDTree is only thing left open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
