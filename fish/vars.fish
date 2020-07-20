@@ -22,4 +22,7 @@ set -x PATH $ORACLE_HOME $PATH
 # python
 set -x PYTHONDONTWRITEBYTECODE 1
 set -x PYTHON_CONFIGURE_OPTS "--enable-framework"
-
+# fix for terminal in vim
+set -e _OLD_FISH_PROMPT_OVERRIDE 
+set -e _OLD_VIRTUAL_PYTHONHOME
+set -e _OLD_VIRTUAL_PATH
