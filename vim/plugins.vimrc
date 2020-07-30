@@ -7,6 +7,7 @@ let g:coc_global_extensions = [
 						\ 'coc-lists',
 						\ 'coc-yaml']
 set shortmess+=c
+
 if has("patch-8.1.1564")
   " Recently vim can merge signcolumn and number column into one
   set signcolumn=number
@@ -15,8 +16,6 @@ else
 endif
 
 " Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
@@ -66,7 +65,7 @@ nmap <leader>rn <Plug>(coc-rename)
 vmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
-
+" List buffers
 nnoremap <silent> <leader>b  :<C-u>CocList buffers<CR>
 
 
@@ -108,6 +107,7 @@ let g:tagbar_type_go = {
 " ---------------------------------------------------------------------
 " VIM-GO
 "
+
 " use golang language server
 let g:go_def_mode="gopls"
 let g:go_info_mode="gopls"
@@ -155,6 +155,7 @@ autocmd Filetype json let g:indentLine_enabled = 0
 " fix for go
 set list lcs=tab:\|\ 
 
+
 " ---------------------------------------------------------------------
 " NERDTREE
 "
@@ -199,6 +200,7 @@ map <Leader>tt<CR> :TagbarToggle<CR>
 " VIM-PYTHON
 "
 "let g:python_highlight_all=1
+
 
 " --------------------------------------------------
 " VIM-TERRAFORM
