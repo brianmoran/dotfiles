@@ -13,6 +13,7 @@ Plug 'mileszs/ack.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'ryanoasis/vim-devicons'
 Plug 'qpkorr/vim-bufkill'
+Plug 'tpope/vim-fugitive'
 
 " Themes
 Plug 'morhetz/gruvbox'
@@ -23,6 +24,7 @@ Plug 'itchyny/lightline.vim'
 " Languages
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 "Plug 'vim-python/python-syntax' "syntax highlighting
+Plug 'hashivim/vim-terraform'
 
 if has('nvim')
     Plug 'neoclide/coc.nvim', {'branch': 'release'}

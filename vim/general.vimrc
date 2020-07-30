@@ -65,6 +65,13 @@ set updatetime=300
 " display command line's tab complete options as a menu
 set wildignore+=*.pyc,__pycache__/
 
+set shiftwidth=2
+set tabstop=2
+
+augroup python
+    au!
+    au FileType python setlocal noexpandtab tabstop=4
+augroup end
 
 " check for changes on CursorHold
 au cursorhold * checktime

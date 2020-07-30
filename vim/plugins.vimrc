@@ -1,11 +1,11 @@
 " ---------------------------------------------------------------------
 " COC
-" ---------------------------------------------------------------------
-" let g:coc_global_extensions = [
-            " \ 'coc-json',
-            " \ 'coc-python',
-	    " \ 'coc-lists',
-            " \ 'coc-yaml']
+"
+let g:coc_global_extensions = [
+						\ 'coc-json',
+						\ 'coc-python',
+						\ 'coc-lists',
+						\ 'coc-yaml']
 set shortmess+=c
 if has("patch-8.1.1564")
   " Recently vim can merge signcolumn and number column into one
@@ -67,12 +67,12 @@ vmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
 
-nnoremap <silent> <space>b  :<C-u>CocList buffers<CR>
+nnoremap <silent> <leader>b  :<C-u>CocList buffers<CR>
 
 
 " ---------------------------------------------------------------------
 " LANGUAGE: GO
-" ---------------------------------------------------------------------
+"
 let s:tlist_def_go_settings = 'go;g:enum;s:struct;u:union;t:type;' .
                            \ 'v:variable;f:function'
 " ctags for go
@@ -107,7 +107,7 @@ let g:tagbar_type_go = {
 
 " ---------------------------------------------------------------------
 " VIM-GO
-" ---------------------------------------------------------------------
+"
 " use golang language server
 let g:go_def_mode="gopls"
 let g:go_info_mode="gopls"
@@ -126,7 +126,7 @@ let g:go_fmt_autosave = 1   " disable gofmt on save
 
 " ---------------------------------------------------------------------
 " FZF
-" ---------------------------------------------------------------------
+"
 " augroup fzf
 "   autocmd!
 "   autocmd! FileType fzf
@@ -149,14 +149,15 @@ nnoremap <C-p> :FZF<CR>
 
 " ---------------------------------------------------------------------
 " INDENTLINE
-" ---------------------------------------------------------------------
+"
 let g:indentLine_enabled = 1
 autocmd Filetype json let g:indentLine_enabled = 0
-
+" fix for go
+set list lcs=tab:\|\ 
 
 " ---------------------------------------------------------------------
 " NERDTREE
-" ---------------------------------------------------------------------
+"
 nnoremap <C-b> :NERDTreeToggle<CR>
 let NERDTreeIgnore = ['\.pyc$', '__pycache__$']
 let g:NERDTreeShowHidden = 1
@@ -173,7 +174,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 " ---------------------------------------------------------------------
 " NERDCOMMENTER
-" ---------------------------------------------------------------------
+"
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
 " Use compact syntax for prettified multi-line comments
@@ -190,12 +191,17 @@ let g:NERDToggleCheckAllLines = 1
 
 " ---------------------------------------------------------------------
 " TAGBAR
-" ---------------------------------------------------------------------
+"
 map <Leader>tt<CR> :TagbarToggle<CR>
 
 
 " ---------------------------------------------------------------------
 " VIM-PYTHON
-" ---------------------------------------------------------------------
+"
 "let g:python_highlight_all=1
 
+" --------------------------------------------------
+" VIM-TERRAFORM
+"
+let g:terraform_align=1
+let g:terraform_fmt_on_save=1
