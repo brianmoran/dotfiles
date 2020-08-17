@@ -1,4 +1,7 @@
-call plug#begin('~/.vim/plugged')
+set runtimepath^=/.vim runtimepath+=~/.vim/after
+let &packpath = &runtimepath
+
+call plug#begin('~/.config/nvim/plugins')
 
 Plug 'tpope/vim-sensible'
 
@@ -23,20 +26,18 @@ Plug 'itchyny/lightline.vim'
 
 " Languages
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-"Plug 'vim-python/python-syntax' "syntax highlighting
+Plug 'vim-python/python-syntax' "syntax highlighting
 Plug 'hashivim/vim-terraform'
 
 if has('nvim')
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'neoclide/coc.nvim', {'branch': 'master'}
 endif
 
 call plug#end()
 
-" ---------------------------------------------------------------------
-" KEY_BINDINGS
-" ---------------------------------------------------------------------
 source $HOME/repos/brianmoran/dotfiles/vim/general.vimrc
 source $HOME/repos/brianmoran/dotfiles/vim/bindings.vimrc
+source $HOME/repos/brianmoran/dotfiles/vim/plugins.vimrc
 
 " ---------------------------------------------------------------------
 " FUNCTIONS
@@ -56,9 +57,3 @@ function! ToggleMouse()
         set mouse=a
     endif
 endfunction
-
-" ------------------------------------------------------------
-" PLUGINS
-" ------------------------------------------------------------
-source $HOME/repos/brianmoran/dotfiles/vim/plugins.vimrc
-

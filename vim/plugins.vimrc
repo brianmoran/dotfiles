@@ -62,12 +62,12 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>rn <Plug>(coc-rename)
 
 " Remap for format selected region
-vmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+"vmap <leader>f  <Plug>(coc-format-selected)
+"nmap <leader>f  <Plug>(coc-format-selected)
 
 " List buffers
 nnoremap <silent> <leader>b  :<C-u>CocList buffers<CR>
-
+nnoremap <silent> <leader>f :CocAction quickfix<CR>
 
 " ---------------------------------------------------------------------
 " LANGUAGE: GO
@@ -199,7 +199,7 @@ map <Leader>tt<CR> :TagbarToggle<CR>
 " ---------------------------------------------------------------------
 " VIM-PYTHON
 "
-"let g:python_highlight_all=1
+let g:python_highlight_all=1
 
 
 " --------------------------------------------------

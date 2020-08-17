@@ -68,10 +68,7 @@ set wildignore+=*.pyc,__pycache__/
 set shiftwidth=2
 set tabstop=2
 
-augroup python
-    au!
-    au FileType python setlocal noexpandtab tabstop=4
-augroup end
+au BufNewFile,BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 smarttab expandtab
 
 " check for changes on CursorHold
 au cursorhold * checktime
