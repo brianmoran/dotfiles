@@ -23,3 +23,6 @@ source ~/.config/fish/urbn.fish
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/moranb1/.google-cloud-sdk/path.fish.inc' ]; . '/Users/moranb1/.google-cloud-sdk/path.fish.inc'; end
 source /usr/local/opt/asdf/asdf.fish
+
+# Init jenv
+if which jenv > /dev/null; jenv init - > /dev/null; end

@@ -11,6 +11,9 @@ set -x GOPATH "$HOME/.go"
 set -x PATH $GOPATH $GOPATH/bin $PATH
 set -x GO111MODULE "auto"
 
+# java
+set -x JAVA_HOME (/usr/libexec/java_home -v1.8)
+
 # oracle
 set -x ORACLE_HOME "/usr/local/oracle/instantclient_12_2"
 set -x DYLD_LIBRARY_PATH "/usr/local/oracle/instantclient_12_2"

@@ -4,10 +4,10 @@ if (has("termguicolors"))
 endif
 
 " set colorscheme
-colorscheme gruvbox
+colorscheme night-owl
 
 " lightline match colorscheme
-let g:lightline = { 'colorscheme': 'gruvbox' }
+let g:lightline = { 'colorscheme': 'nightowl' }
 
 " system clipboard
 set clipboard+=unnamed
