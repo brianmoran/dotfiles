@@ -4,10 +4,28 @@ if (has("termguicolors"))
 endif
 
 " set colorscheme
-colorscheme night-owl
+" colorscheme night-owl
+colorscheme gruvbox
 
 " lightline match colorscheme
-let g:lightline = { 'colorscheme': 'nightowl' }
+" let g:lightline = { 'colorscheme': 'nightowl' }
+let g:lightline = { 
+				\ 'colorscheme': 'gruvbox',
+				\ 'component_function': {
+				\ 	'filename': 'LightlineFilename'
+				\ }
+				\ }
+function! LightlineFilename()
+				return expand('%:~:.')
+endfunction
+
+" attempt to fix guibg color in night-owl
+" if g:colors_name == 'night-owl'
+"   hi Normal guifg=#d6deeb ctermfg=253 guibg=011627 ctermbg=233 gui=NONE cterm=NONE
+"   hi SignColumn guifg=NONE ctermfg=NONE guibg=011627 ctermbg=233 gui=NONE cterm=NONE
+"   hi LineNr guifg=#444444 ctermfg=238 guibg=011627 ctermbg=233 gui=NONE cterm=NONE
+"   hi EndOfBuffer guifg=#444444 ctermfg=238 guibg=011627 ctermbg=233 gui=NONE cterm=NONE
+" endif
 
 " system clipboard
 set clipboard+=unnamed
@@ -56,19 +74,11 @@ set smartcase
 set splitbelow
 set splitright
 
-" set window title to current edited file
-set title
-
 " lower updatetime
 set updatetime=300
 
 " display command line's tab complete options as a menu
 set wildignore+=*.pyc,__pycache__/
-
-set shiftwidth=2
-set tabstop=2
-
-au BufNewFile,BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 smarttab expandtab
 
 " check for changes on CursorHold
 au cursorhold * checktime

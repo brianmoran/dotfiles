@@ -12,32 +12,32 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
 Plug 'yggdroot/indentline'
-Plug 'mileszs/ack.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'ryanoasis/vim-devicons'
 Plug 'qpkorr/vim-bufkill'
 Plug 'tpope/vim-fugitive'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'jelera/vim-javascript-syntax'
+Plug 'jiangmiao/auto-pairs'
 
 " Themes
 Plug 'morhetz/gruvbox'
 Plug 'haishanh/night-owl.vim'
-Plug 'whatyouhide/vim-gotham'
 Plug 'itchyny/lightline.vim'
 
 " Languages
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'vim-python/python-syntax' "syntax highlighting
-Plug 'hashivim/vim-terraform'
+" Plug 'sheerun/vim-polyglot'
 
 if has('nvim')
-    Plug 'neoclide/coc.nvim', {'branch': 'master'}
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
 endif
 
 call plug#end()
 
-source $HOME/repos/brianmoran/dotfiles/vim/general.vimrc
-source $HOME/repos/brianmoran/dotfiles/vim/bindings.vimrc
-source $HOME/repos/brianmoran/dotfiles/vim/plugins.vimrc
+source $HOME/repos/dotfiles/vim/general.vimrc
+source $HOME/repos/dotfiles/vim/bindings.vimrc
+source $HOME/repos/dotfiles/vim/plugins.vimrc
+source $HOME/repos/dotfiles/vim/coc.vimrc
 
 " ---------------------------------------------------------------------
 " FUNCTIONS

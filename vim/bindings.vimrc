@@ -5,7 +5,8 @@ let mapleader = "\<Space>""
 nnoremap <Leader>w<CR> :w<CR>
 
 " fast close
-nnoremap <Leader>q<CR> :q<CR>
+" nnoremap <Leader>q<CR> :q<CR>
+nnoremap <Leader>q<CR> <c-w>q
 
 " save and close
 nnoremap <Leader>wq<CR> :wq<CR>
@@ -26,7 +27,10 @@ nnoremap <silent> <s-tab> :bprevious<CR>
 nnoremap <silent> <Leader>bd<CR> :BD<CR>
 
 " disable dd register
-nnoremap dd "_dd 
+" nnoremap dd "_dd
+
+" clear highlighting
+nnoremap <Leader>/ :nohl<CR>
 
 " open terminal on ctrl+n
 nnoremap <c-n> :call OpenTerminal()<CR>
@@ -38,3 +42,6 @@ function! OpenTerminal()
   split term://fish
   resize 10
 endfunction
+
+" autocmd FileType javascript setlocal ts=4 sts=4 sw=4
+autocmd FileType javascript set tabstop=2|set shiftwidth=2|set expandtab
