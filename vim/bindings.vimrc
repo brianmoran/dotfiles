@@ -5,7 +5,6 @@ let mapleader = "\<Space>""
 nnoremap <Leader>w<CR> :w<CR>
 
 " fast close
-" nnoremap <Leader>q<CR> :q<CR>
 nnoremap <Leader>q<CR> <c-w>q
 
 " save and close
@@ -26,22 +25,17 @@ nnoremap <silent> <s-tab> :bprevious<CR>
 " delete buffer
 nnoremap <silent> <Leader>bd<CR> :BD<CR>
 
-" disable dd register
-" nnoremap dd "_dd
+" dont delete in normal mode
+nmap <Del> <nop>
+
+" deleting
+nnoremap dd "_dd
+nnoremap <leader>d "_dd
+xnoremap <leader>d "_dd
+xnoremap <leader>p "_dP
 
 " clear highlighting
 nnoremap <Leader>/ :nohl<CR>
 
-" open terminal on ctrl+n
-nnoremap <c-n> :call OpenTerminal()<CR>
-
-" turn terminal to normal mode with escape
-tnoremap <Esc> <C-\><C-n>
-
-function! OpenTerminal()
-  split term://fish
-  resize 10
-endfunction
-
-" autocmd FileType javascript setlocal ts=4 sts=4 sw=4
-autocmd FileType javascript set tabstop=2|set shiftwidth=2|set expandtab
+" show history
+nnoremap <Leader>h :History<CR>

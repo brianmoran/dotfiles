@@ -1,5 +1,12 @@
 
 " ---------------------------------------------------------------------
+" AIRLINE
+"
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamecollapse = 0
+let g:airline_theme='palenight'
+
+" ---------------------------------------------------------------------
 " LANGUAGE: GO
 "
 let s:tlist_def_go_settings = 'go;g:enum;s:struct;u:union;t:type;' .
@@ -82,10 +89,12 @@ let g:NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 let NERDTreeQuitOnOpen = 0
 
+" Automaticaly close nvim if NERDTree is only thing left open
 autocmd bufenter * if (winnr("$") == 1
 			\ && exists("b:NERDTree") 
-			\ && b:NERDTree.isTabTree()) | q | endif " Automaticaly close nvim if NERDTree is only thing left open
+			\ && b:NERDTree.isTabTree()) | q | endif
 
+map <Leader>nf<CR> :NERDTreeFind<CR>
 
 " ---------------------------------------------------------------------
 " NERDCOMMENTER

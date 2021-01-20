@@ -1,23 +1,13 @@
 " enable termguicolors
 if (has("termguicolors"))
- set termguicolors
+    set termguicolors
 endif
 
 " set colorscheme
 " colorscheme night-owl
-colorscheme gruvbox
-
-" lightline match colorscheme
-" let g:lightline = { 'colorscheme': 'nightowl' }
-let g:lightline = { 
-				\ 'colorscheme': 'gruvbox',
-				\ 'component_function': {
-				\ 	'filename': 'LightlineFilename'
-				\ }
-				\ }
-function! LightlineFilename()
-				return expand('%:~:.')
-endfunction
+" colorscheme flattened_dark
+colorscheme palenight
+" colorscheme gruvbox
 
 " attempt to fix guibg color in night-owl
 " if g:colors_name == 'night-owl'
@@ -26,6 +16,9 @@ endfunction
 "   hi LineNr guifg=#444444 ctermfg=238 guibg=011627 ctermbg=233 gui=NONE cterm=NONE
 "   hi EndOfBuffer guifg=#444444 ctermfg=238 guibg=011627 ctermbg=233 gui=NONE cterm=NONE
 " endif
+
+" highlight current line
+set cursorline
 
 " system clipboard
 set clipboard+=unnamed
@@ -66,6 +59,11 @@ set noswapfile
 " enable line numbers and relative line numbers
 set number
 set relativenumber
+:augroup numbertoggle
+:  autocmd!
+:  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu | set rnu   | endif
+:  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu | set nornu | endif
+:augroup END
 
 " auto switch to case-sensitive when search contains uppercase letter
 set smartcase
@@ -91,4 +89,14 @@ au BufNewFile,BufRead * setlocal formatoptions-=cro
 
 " format json
 com! FormatJSON %!python -m json.tool<CR>
+
+" folding
+set foldmethod=syntax
+let javaScript_fold=1
+set foldlevelstart=99
+
+set tabstop=4|set shiftwidth=4|set expandtab
+
+" autocmd FileType javascript setlocal ts=4 sts=4 sw=4
+autocmd FileType javascript,typescript,json,vue,yaml set tabstop=2|set shiftwidth=2|set expandtab
 

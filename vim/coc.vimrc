@@ -3,11 +3,11 @@
 "
 let g:coc_disable_startup_warning = 1
 let g:coc_global_extensions = [
-						\ 'coc-json',
-						\ 'coc-tsserver',
-						\ 'coc-eslint',
-						\ 'coc-lists',
-						\ 'coc-yaml']
+    \ 'coc-json',
+    \ 'coc-tabnine',
+    \ 'coc-lists',
+    \ 'coc-tsserver',
+    \ 'coc-yaml']
 set shortmess+=c
 
 if has("patch-8.1.1564")
@@ -61,6 +61,7 @@ endfunction
 
 " Highlight symbol under cursor
 autocmd CursorHold * silent call CocActionAsync('highlight')
+highlight CocHighlightText guibg='#434758' guifg='#d0d0d0'
 
 " Outline and Symbols
 nnoremap <silent> <leader>co  :<C-u>CocList outline<cr>
@@ -89,3 +90,16 @@ nmap <leader>ca  <Plug>(coc-codeaction-selected)
 nnoremap <silent> <leader>b  :<C-u>CocList buffers<CR>
 nnoremap <silent> <leader>f :CocAction quickfix<CR>
 
+" Multiple cursors
+nmap <silent> <C-c> <Plug>(coc-cursors-position)
+nmap <silent> <C-d> <Plug>(coc-cursors-word)
+xmap <silent> <C-d> <Plug>(coc-cursors-range)
+" use normal command like `<leader>xi(`
+nmap <leader>x  <Plug>(coc-cursors-operator)
+
+
+" coc-prettier
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
+" coc-yank
+nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
