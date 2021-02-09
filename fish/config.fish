@@ -74,3 +74,4 @@ function fish_prompt
 end
 
 set -g fish_user_paths "/usr/local/opt/ruby/bin" $fish_user_paths
+set -g fish_user_paths "/usr/local/sbin" $fish_user_paths
