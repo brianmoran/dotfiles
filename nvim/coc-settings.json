@@ -1,0 +1,15 @@
+{
+  "coc.preferences.formatOnSaveFiletypes": ["javascript", "typescript", "json"],
+  "prettier.semi": false,
+  "prettier.singleQuote": true,
+  "prettier.eslintIntegration": true,
+  "prettier.tslintIntegration": true,
+  "languageserver": {
+    "go": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod"],
+      "trace.server": "verbose",
+      "filetypes": ["go"]
+    }
+  }
+}
