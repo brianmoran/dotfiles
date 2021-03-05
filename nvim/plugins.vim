@@ -1,12 +1,11 @@
 
 " ---------------------------------------------------------------------
 " AIRLINE
-"
+" ---------------------------------------------------------------------
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamecollapse = 0
-" let g:airline_theme='dracula'
-let g:airline_theme='palenight'
-" let g:airline_powerline_fonts = 1
+let g:airline_theme='molokai'
+let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
@@ -37,7 +36,7 @@ let g:airline#extensions#hunks#hunk_symbols = [' ', 'ﰣ ', ' ']
 
 " ---------------------------------------------------------------------
 " LANGUAGE: GO
-"
+" ---------------------------------------------------------------------
 let s:tlist_def_go_settings = 'go;g:enum;s:struct;u:union;t:type;' .
                            \ 'v:variable;f:function'
 " ctags for go
@@ -72,7 +71,7 @@ let g:tagbar_type_go = {
 
 " ---------------------------------------------------------------------
 " VIM-GO
-"
+" ---------------------------------------------------------------------
 
 " use golang language server
 let g:go_def_mode="gopls"
@@ -92,17 +91,17 @@ let g:go_fmt_autosave = 1   " disable gofmt on save
 
 " ---------------------------------------------------------------------
 " FZF
-"
-" if has("nvim")
-"   au TermOpen * tnoremap <buffer> <Esc> <c-\><c-n>
-" endif
+" ---------------------------------------------------------------------
+if has("nvim")
+  au TermOpen * tnoremap <buffer> <Esc> <c-\><c-n>
+endif
 
-" nnoremap <C-p> :FZF<CR>
+nnoremap <C-p> :FZF<CR>
 
 
 " ---------------------------------------------------------------------
 " INDENTLINE
-"
+" ---------------------------------------------------------------------
 let g:indentLine_enabled = 1
 autocmd Filetype json let g:indentLine_enabled = 0
 set list lcs=tab:\|\ " fix for go
@@ -110,24 +109,24 @@ set list lcs=tab:\|\ " fix for go
 
 " ---------------------------------------------------------------------
 " NERDTREE
-"
-" nnoremap <C-b> :NERDTreeToggle<CR>
-" let NERDTreeIgnore = ['\.pyc$', '__pycache__$']
-" let g:NERDTreeShowHidden = 1
-" let g:NERDTreeMinimalUI = 1
-" let NERDTreeDirArrows = 1
-" let NERDTreeQuitOnOpen = 0
+" ---------------------------------------------------------------------
+nnoremap <C-n> :NERDTreeToggle<CR>
+let NERDTreeIgnore = ['\.pyc$', '__pycache__$']
+let g:NERDTreeShowHidden = 1
+let g:NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+let NERDTreeQuitOnOpen = 0
 
-" " Automaticaly close nvim if NERDTree is only thing left open
-" autocmd bufenter * if (winnr("$") == 1
-"       \ && exists("b:NERDTree")
-"       \ && b:NERDTree.isTabTree()) | q | endif
+" Automaticaly close nvim if NERDTree is only thing left open
+autocmd bufenter * if (winnr("$") == 1
+      \ && exists("b:NERDTree")
+      \ && b:NERDTree.isTabTree()) | q | endif
 
-" map <Leader>nf<CR> :NERDTreeFind<CR>
+map <Leader>nf<CR> :NERDTreeFind<CR>
 
 " ---------------------------------------------------------------------
 " NERDCOMMENTER
-"
+" ---------------------------------------------------------------------
 
 let g:NERDCreateDefaultMappings = 0
 let g:NERDSpaceDelims = 1 " Add spaces after comment delimiters by default
@@ -144,39 +143,44 @@ vnoremap <C-_> :call NERDComment("v", "Toggle")<CR>
 
 " ---------------------------------------------------------------------
 " NVIM-TREE
-"
+" ---------------------------------------------------------------------
 
-let g:nvim_tree_show_icons = {
-    \ 'git': 1,
-    \ 'folders': 0,
-    \ 'files': 0,
-    \ }
+" let g:nvim_tree_show_icons = {
+"     \ 'git': 1,
+"     \ 'folders': 0,
+"     \ 'files': 0,
+"     \ }
 
-let g:nvim_tree_icons = {
-    \ 'default': '',
-    \ 'symlink': '',
-    \ 'git': {
-    \   'unstaged': "✗",
-    \   'staged': "✓",
-    \   'unmerged': "",
-    \   'renamed': "➜",
-    \   'untracked': "★"
-    \   },
-    \ 'folder': {
-    \   'default': "",
-    \   'open': "",
-    \   'symlink': "",
-    \   }
-    \ }
+" let g:nvim_tree_icons = {
+"     \ 'default': '',
+"     \ 'symlink': '',
+"     \ 'git': {
+"     \   'unstaged': "✗",
+"     \   'staged': "✓",
+"     \   'unmerged': "",
+"     \   'renamed': "➜",
+"     \   'untracked': "★"
+"     \   },
+"     \ 'folder': {
+"     \   'default': "",
+"     \   'open': "",
+"     \   'symlink': "",
+"     \   }
+"     \ }
 
-nnoremap <C-n> :NvimTreeToggle<CR>
-nnoremap <leader>r :NvimTreeRefresh<CR>
-nnoremap <leader>n :NvimTreeFindFile<CR>
+" nnoremap <C-n> :NvimTreeToggle<CR>
+" nnoremap <leader>r :NvimTreeRefresh<CR>
+" nnoremap <leader>n :NvimTreeFindFile<CR>
 
+" ---------------------------------------------------------------------
+" STARTIFY
+" ---------------------------------------------------------------------
+let g:startify_change_to_dir=0
+let g:startify_change_vcs_root=1
 
 " ---------------------------------------------------------------------
 " TAGBAR
-"
+" ---------------------------------------------------------------------
 map <Leader>tt<CR> :TagbarToggle<CR>
 
 
@@ -188,3 +192,4 @@ nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+

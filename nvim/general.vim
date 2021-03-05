@@ -5,7 +5,9 @@ endif
 
 " set colorscheme
 " colorscheme dracula
-colorscheme palenight
+" colorscheme palenight
+colorscheme one-monokai
+" colorscheme sonokai
 
 " highlight current line
 set cursorline

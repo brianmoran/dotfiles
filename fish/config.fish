@@ -29,7 +29,7 @@ set green (set_color green)
 set red (set_color red)
 set gray (set_color -o black)
 
-set fish_ambiguous_width 2
+#set fish_ambiguous_width 2
 
 # set fish_color_autosuggestion 'red'
 set fish_color_autosuggestion 'yellow' '--bold'

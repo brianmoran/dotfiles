@@ -4,9 +4,11 @@ let &packpath = &runtimepath
 call plug#begin('~/.config/nvim/plugins')
 
 " Utility
-" Plug 'scrooloose/nerdtree'  " File tree
+Plug 'scrooloose/nerdtree'  " File tree
 Plug 'preservim/nerdcommenter'  " Comments
 Plug 'qpkorr/vim-bufkill'   " Leave window open
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'  "  Tag outline 
 Plug 'yggdroot/indentline'  " Indent lines
 Plug 'airblade/vim-gitgutter'   " Git in the gutter
@@ -16,26 +18,29 @@ Plug 'christoomey/vim-tmux-navigator'   " Navigate tmux panes easier
 Plug 'kassio/neoterm'   " Single term buffer
 Plug 'szw/vim-maximizer'  " Maximize splits
 Plug 'tpope/vim-sleuth'   " Infer spacing
-Plug 'SirVer/ultisnips'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " Themes
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'dracula/vim'
+Plug 'fratajczak/one-monokai-vim'
+Plug 'sainnhe/sonokai'
 
 Plug 'ryanoasis/vim-devicons'
 Plug 'sheerun/vim-polyglot'
+Plug 'nikvdp/ejs-syntax'
 Plug 'moll/vim-node'  " Tools for working with node
 
 " New plugins to try out
-Plug 'kyazdani42/nvim-tree.lua'
-Plug 'mhinz/vim-startify'
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'voldikss/vim-floaterm'
+" Plug 'kyazdani42/nvim-tree.lua'
+Plug 'mhinz/vim-startify'   " Startup screen
+Plug 'nvim-lua/popup.nvim'  " Required for telescope
+Plug 'nvim-lua/plenary.nvim'    " Required for telescope
+Plug 'nvim-telescope/telescope.nvim'    " Find, filter, preview
+" Plug 'voldikss/vim-floaterm'
 Plug 'lilydjwg/colorizer'
-Plug 'pangloss/vim-javascript'  " js synstax highlighting
+Plug 'jelera/vim-javascript-syntax'
 
 if has('nvim')
     Plug 'neoclide/coc.nvim', {'branch': 'release'}

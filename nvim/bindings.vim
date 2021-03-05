@@ -2,13 +2,13 @@
 let mapleader = "\<Space>""
 
 " fast write
-" nnoremap <Leader>w<CR> :w<CR>
+nnoremap <Leader>w<CR> :w<CR>
 
 " fast close
-" nnoremap <Leader>q<CR> <c-w>q
+nnoremap <Leader>q<CR> <c-w>q
 
 " save and close
-" nnoremap <Leader>wq<CR> :wq<CR>
+nnoremap <Leader>wq<CR> :wq<CR>
 
 " outdent in visual and normal mode
 xnoremap <s-tab> <gv
